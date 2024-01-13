@@ -1,0 +1,1 @@
+export { useFrom } from "src/components/from";
