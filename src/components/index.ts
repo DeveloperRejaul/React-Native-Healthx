@@ -5,5 +5,4 @@ import CheckBox from './checkBox/CheckBox';
 import Loading from './loading/Loading';
 import { Logo } from './logo/Logo';
 
-
-export { Button, CheckBox, InputText, Card, Logo,Loading };
+export { Button, CheckBox, InputText, Card, Logo, Loading };
