@@ -1,27 +1,38 @@
-import { StyleSheet, Text, View } from 'react-native';
+/* eslint-disable react-hooks/rules-of-hooks */
+import { Card, Loading } from '@components';
+import React, { useEffect } from 'react';
+import { FlatList, StyleSheet, Text, View } from 'react-native';
+import { useFetch } from 'src/hooks/useFetch';
+import { rh, rw } from 'src/utils/size';
 
-export default function TabOneScreen() {
-  return (
-    <View style={styles.container}>
-      <Text style={styles.title}>Tab One</Text>
-      <View style={styles.separator} />
-    </View>
-  );
+export default function index() {
+  const { data, handleGet, isError, isLoading, isSuccess } = useFetch();
+
+  useEffect(() => {
+    handleGet('/products?limit=6');
+  }, []);
+
+  if (isLoading) return <Loading />;
+  if (isSuccess) return <CardList {...{ data }} />;
 }
 
-const styles = StyleSheet.create({
-  container: {
-    alignItems: 'center',
-    flex: 1,
-    justifyContent: 'center',
-  },
-  separator: {
-    height: 1,
-    marginVertical: 30,
-    width: '80%',
-  },
-  title: {
-    fontSize: 20,
-    fontWeight: 'bold',
-  },
-});
+function CardList(props) {
+  return (
+    <FlatList
+      contentContainerStyle={{ paddingHorizontal: rw(3), paddingTop: rh(2) }}
+      numColumns={2}
+      columnWrapperStyle={{ justifyContent: 'space-between' }}
+      data={props.data}
+      key={({ item }) => item.id}
+      renderItem={({ item }) => (
+        <Card
+          rating={item.rating.rate}
+          price={item.price}
+          uri={item.image}
+          title={item.title}
+          description={item.description}
+        />
+      )}
+    />
+  );
+}

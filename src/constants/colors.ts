@@ -41,4 +41,4 @@ export const colors = {
   textLight800: '#404040',
   textLight900: '#262626',
   textLight950: '#171717',
- };
+};

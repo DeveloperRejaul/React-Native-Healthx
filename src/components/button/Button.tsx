@@ -1,22 +1,20 @@
-import {type IButtonTypes} from "./type"
-import { Pressable, Text } from 'react-native'
-import React from 'react'
-import { styles } from './style'
-import { rw } from "src/utils/size"
+import React from 'react';
+import { ActivityIndicator, Pressable, Text } from 'react-native';
+import { rf } from 'src/utils/size';
 
-export default function Button(props:IButtonTypes) {
+import { styles } from './style';
+import { type IButtonTypes } from './type';
 
-const {
-    text,
-    type = "normal",
-    onPress,
-    textStyle,
-    bodyStyle
-} = props
+export default function Button(props: IButtonTypes) {
+  const { text, type = 'normal', onPress, textStyle, bodyStyle, isLoading } = props;
 
   return (
-    <Pressable onPress={onPress} style={[styles[`body${type}`],bodyStyle]}>
-      <Text style={[styles[`text${type}`],textStyle]}>{text}</Text>
+    <Pressable onPress={onPress} style={[styles[`body${type}`], bodyStyle]}>
+      {isLoading ? (
+        <ActivityIndicator size={rf(4)} />
+      ) : (
+        <Text style={[styles[`text${type}`], textStyle]}>{text}</Text>
+      )}
     </Pressable>
-  )
+  );
 }

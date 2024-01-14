@@ -8,10 +8,10 @@ export const unstable_settings = {
 export default function RootLayout() {
   return (
     <SafeAreaView style={{ flex: 1 }}>
-      <Stack>
-        <Stack.Screen name="index" options={{ headerShown: false }} />
-        <Stack.Screen name="(main)" options={{ headerShown: false }} />
-        <Stack.Screen name="(auth)" options={{ headerShown: false }} />
+      <Stack screenOptions={{ headerShown: false }}>
+        <Stack.Screen name="index" />
+        <Stack.Screen name="(main)" />
+        <Stack.Screen name="(auth)" />
       </Stack>
     </SafeAreaView>
   );

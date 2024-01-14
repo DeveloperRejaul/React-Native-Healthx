@@ -1,12 +1,41 @@
-import { StyleSheet, Text, View } from 'react-native'
-import React from 'react'
+import React from 'react';
+import { Image, StyleSheet, Text, View } from 'react-native';
+import { colors } from 'src/constants/colors';
+import { rh, rw } from 'src/utils/size';
 
-export default function Card() {
-  return (
-    <View>
-      <Text>Card</Text>
-    </View>
-  )
+export interface ICardProps {
+  uri: string;
+  title: string;
+  description: string;
+  price: string;
+  rating: string;
 }
 
-const styles = StyleSheet.create({})
+export default function Card(props: ICardProps) {
+  const { uri, title, description, price, rating } = props;
+
+  return (
+    <View style={styles.cardBody}>
+      <Image
+        resizeMode="contain"
+        style={{ width: '80%', height: '70%', backgroundColor: 'transparent' }}
+        source={{ uri }}
+      />
+      <Text numberOfLines={1}>{title}</Text>
+      <Text numberOfLines={2}>{description}</Text>
+      <Text numberOfLines={1}>{price}</Text>
+    </View>
+  );
+}
+
+const styles = StyleSheet.create({
+  cardBody: {
+    backgroundColor: colors.textLight0,
+    width: rw(45),
+    height: rh(33),
+    borderRadius: 10,
+    padding: 7,
+    marginBottom: 20,
+    overflow: 'hidden',
+  },
+});
