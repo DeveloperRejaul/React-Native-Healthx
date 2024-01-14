@@ -16,11 +16,18 @@ export default function Card(props: ICardProps) {
 
   return (
     <View style={styles.cardBody}>
-      <Image
-        resizeMode="contain"
-        style={{ width: '80%', height: '70%', backgroundColor: 'transparent' }}
-        source={{ uri }}
-      />
+      <View
+        style={{
+          width: '100%',
+          justifyContent: 'center',
+          alignItems: 'center',
+        }}>
+        <Image
+          resizeMode="contain"
+          style={{ width: '80%', height: '70%', backgroundColor: 'transparent' }}
+          source={{ uri }}
+        />
+      </View>
       <Text numberOfLines={1}>{title}</Text>
       <Text numberOfLines={2}>{description}</Text>
       <Text numberOfLines={1}>{price}</Text>
