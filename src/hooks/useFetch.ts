@@ -6,9 +6,15 @@ export const useFetch = () => {
   const [isError, setError] = useState(false);
   const [isSuccess, setSuccess] = useState(false);
 
-  const handleGet = (endPoint: string) => {
+  // handle all het requests this function
+  const handleGet = (endPoint: string, token?: string) => {
     setLoading(true);
-    fetch(BASE_URL + endPoint)
+    fetch(BASE_URL + endPoint, {
+      method: 'GET',
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    })
       .then((response) => response.json())
       .then((responseJson) => {
         setLoading(false);
@@ -21,5 +27,25 @@ export const useFetch = () => {
       });
   };
 
-  return { handleGet, isLoading, isSuccess, data, isError };
+  // handle all post request  this function
+  const handlePost = (endPoint: string, body: object) => {
+    setLoading(true);
+    fetch(BASE_URL + endPoint, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(body),
+    })
+      .then((res) => res.json())
+      .then((responseJson) => {
+        setLoading(false);
+        setData(responseJson);
+        setSuccess(true);
+      })
+      .catch(() => {
+        setLoading(false);
+        setError(true);
+      });
+  };
+
+  return { handleGet, handlePost, isLoading, isSuccess, data, isError };
 };

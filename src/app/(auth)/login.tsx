@@ -1,34 +1,49 @@
 /* eslint-disable react-hooks/rules-of-hooks */
 import { Button, CheckBox, InputText, Logo } from '@components';
 import { Link, useRouter } from 'expo-router';
-import React, { useState } from 'react';
-import { Alert, ScrollView, StyleSheet, Text, View } from 'react-native';
+import React, { useEffect, useState } from 'react';
+import { ScrollView, StyleSheet, Text, View } from 'react-native';
 import { colors } from 'src/constants/colors';
+import { useFetch } from 'src/hooks/useFetch';
 import { rf, rh, rw } from 'src/utils/size';
+import { storage } from 'src/utils/storage';
 const OUTLINE_WIDTH = rw(25);
 const OUTLINE_RADIUS = OUTLINE_WIDTH / 2;
 const LOGO_SIZE = rw(10);
-
+const REMEMBER_TIME = 60 * 24 * 7;
 export default function login() {
-  const [email, setEmail] = useState('');
+  const [name, setName] = useState('');
   const [password, setPassword] = useState('');
-  const [isLoading, setLoading] = useState(false);
+  const [check, setCheck] = useState(false);
   const router = useRouter();
+  const { handlePost, handleGet, data, isLoading, isSuccess } = useFetch();
 
   const handleLogin = () => {
-    if (!email) Alert.alert('Email is required');
-    if (!password) Alert.alert('Password is required');
-
-    if (email && password) {
-      setLoading(true);
-
-      const timeout = setTimeout(() => {
-        setLoading(false);
-        router.replace('/(main)/');
-        clearTimeout(timeout);
-      }, 1000);
-    }
+    handlePost('/auth/login', {
+      username: name,
+      password,
+      expiresInMins: check ? REMEMBER_TIME : 60,
+    });
   };
+
+  useEffect(() => {
+    const init = async () => {
+      if (isSuccess && data) {
+        const token = await storage.getAsyncData({ key: '@authToken' });
+        if (!token) await storage.saveAsyncData({ data: data.token, key: '@authToken' });
+        router.replace('/(main)/');
+      }
+    };
+    init();
+  }, [data, isSuccess]);
+
+  useEffect(() => {
+    const init = async () => {
+      const token = await storage.getAsyncData({ key: '@authToken' });
+      if (token) handleGet('/auth/me', token);
+    };
+    init();
+  }, []);
 
   return (
     <ScrollView
@@ -53,12 +68,12 @@ export default function login() {
             <Text style={styles.subTitle}>Login to your account</Text>
           </View>
 
-          <InputText value={email} onChangeText={setEmail} label="Phone or Email" />
+          <InputText value={name} onChangeText={setName} label="Phone or Email" />
           <InputText value={password} onChangeText={setPassword} type="password" label="Password" />
 
           <View style={styles.checkBoxBody}>
             <View style={styles.checkBox}>
-              <CheckBox />
+              <CheckBox handleCheck={setCheck} />
               <Text style={styles.checkText}>Remember Me</Text>
             </View>
             <Link style={styles.link} href="/forgot-password">

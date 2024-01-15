@@ -19,14 +19,14 @@ export default function index() {
         contentContainerStyle={{ paddingHorizontal: rw(3), paddingTop: rh(2) }}
         numColumns={2}
         columnWrapperStyle={{ justifyContent: 'space-between' }}
-        data={data}
+        data={data?.products}
         keyExtractor={(item) => item.id.toString()}
         renderItem={({ item }) => (
           <Card
-            rating={item.rating.rate}
+            rating={item.rating}
             price={item.price}
-            uri={item.image}
-            title={item.title}
+            uri={item.thumbnail}
+            title={item.category}
             description={item.description}
           />
         )}
