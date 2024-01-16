@@ -30,7 +30,7 @@ export default function login() {
     const init = async () => {
       if (isSuccess && data) {
         const token = await storage.getAsyncData({ key: '@authToken' });
-        if (!token) await storage.saveAsyncData({ data: data.token, key: '@authToken' });
+        if (token !== 'error') await storage.saveAsyncData({ data: data.token, key: '@authToken' });
         router.replace('/(main)/');
       }
     };
@@ -40,7 +40,7 @@ export default function login() {
   useEffect(() => {
     const init = async () => {
       const token = await storage.getAsyncData({ key: '@authToken' });
-      if (token) handleGet('/auth/me', token);
+      if (token !== 'error') handleGet('/auth/me', token);
     };
     init();
   }, []);
