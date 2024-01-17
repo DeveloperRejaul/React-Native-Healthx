@@ -1,12 +1,14 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { Text, View } from 'react-native';
+import { colors } from 'src/constants/colors';
+import { rf } from 'src/utils/size';
 
 export default function register() {
   return (
-    <View>
-      <Text>register</Text>
+    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+      <Text style={{ fontSize: rf(3), fontWeight: '700', color: colors.coolGray900 }}>
+        Register
+      </Text>
     </View>
   );
 }
-
-const styles = StyleSheet.create({});

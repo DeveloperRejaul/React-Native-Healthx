@@ -11,9 +11,7 @@ export const useFetch = () => {
     setLoading(true);
     fetch(BASE_URL + endPoint, {
       method: 'GET',
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
+      headers: { Authorization: `Bearer ${token}` },
     })
       .then((response) => response.json())
       .then((responseJson) => {

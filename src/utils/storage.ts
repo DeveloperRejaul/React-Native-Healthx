@@ -29,6 +29,7 @@ export const storage: IObjectStorage = {
   getAsyncData: async ({ key }) => {
     try {
       const data = await AsyncStorage.getItem(key);
+
       if (data) return data;
       return 'error';
     } catch (err) {

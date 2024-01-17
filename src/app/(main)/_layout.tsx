@@ -1,6 +1,8 @@
 import { MaterialIcons, Fontisto, Ionicons } from '@expo/vector-icons';
+import { LinearGradient } from 'expo-linear-gradient';
 import { Tabs } from 'expo-router';
-import { View, StyleSheet } from 'react-native';
+import React from 'react';
+import { StyleSheet } from 'react-native';
 import { colors } from 'src/constants/colors';
 import { rf, rh } from 'src/utils/size';
 
@@ -19,13 +21,15 @@ export default () => (
       name="index"
       options={{
         tabBarIcon: ({ color, focused }) => (
-          <View
-            style={{
-              ...styles.iconBody,
-              backgroundColor: focused ? colors.lightBlue500 : colors.textLight0,
-            }}>
+          <LinearGradient
+            colors={
+              focused
+                ? [colors.lightBlue500, colors.lightBlue600]
+                : [colors.textLight0, colors.textLight0]
+            }
+            style={styles.iconBody}>
             <MaterialIcons name="home" size={rf(4)} color={color} />
-          </View>
+          </LinearGradient>
         ),
       }}
     />
@@ -33,13 +37,15 @@ export default () => (
       name="love"
       options={{
         tabBarIcon: ({ color, focused }) => (
-          <View
-            style={{
-              ...styles.iconBody,
-              backgroundColor: focused ? colors.lightBlue500 : colors.textLight0,
-            }}>
+          <LinearGradient
+            colors={
+              focused
+                ? [colors.lightBlue500, colors.lightBlue600]
+                : [colors.textLight0, colors.textLight0]
+            }
+            style={styles.iconBody}>
             <Fontisto name="heart" size={rf(3)} color={color} />
-          </View>
+          </LinearGradient>
         ),
       }}
     />
@@ -47,13 +53,15 @@ export default () => (
       name="shop"
       options={{
         tabBarIcon: ({ color, focused }) => (
-          <View
-            style={{
-              ...styles.iconBody,
-              backgroundColor: focused ? colors.lightBlue500 : colors.textLight0,
-            }}>
+          <LinearGradient
+            colors={
+              focused
+                ? [colors.lightBlue500, colors.lightBlue600]
+                : [colors.textLight0, colors.textLight0]
+            }
+            style={styles.iconBody}>
             <MaterialIcons name="shopping-cart" size={rf(4)} color={color} />
-          </View>
+          </LinearGradient>
         ),
       }}
     />
@@ -61,13 +69,15 @@ export default () => (
       name="profile"
       options={{
         tabBarIcon: ({ color, focused }) => (
-          <View
-            style={{
-              ...styles.iconBody,
-              backgroundColor: focused ? colors.lightBlue500 : colors.textLight0,
-            }}>
+          <LinearGradient
+            colors={
+              focused
+                ? [colors.lightBlue500, colors.lightBlue600]
+                : [colors.textLight0, colors.textLight0]
+            }
+            style={styles.iconBody}>
             <Ionicons name="person" size={rf(4)} color={color} />
-          </View>
+          </LinearGradient>
         ),
       }}
     />

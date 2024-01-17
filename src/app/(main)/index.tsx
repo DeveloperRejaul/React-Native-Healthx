@@ -26,7 +26,7 @@ export default function index() {
             rating={item.rating}
             price={item.price}
             uri={item.thumbnail}
-            title={item.category}
+            title={item.title}
             description={item.description}
           />
         )}

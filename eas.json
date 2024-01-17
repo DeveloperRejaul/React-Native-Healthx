@@ -1,0 +1,25 @@
+{
+    "build": {
+      "preview": {
+        "env": {
+            "EXPO_PUBLIC_API_URL": "https://dummyjson.com"
+            },
+        "android": {
+          "buildType": "apk"
+        }
+      },
+      "preview2": {
+        "android": {
+          "gradleCommand": ":app:assembleRelease"
+        }
+      },
+      "preview3": {
+        "developmentClient": true
+      },
+      "preview4": {
+        "distribution": "internal"
+      },
+      "production": {}
+    }
+  }
+  

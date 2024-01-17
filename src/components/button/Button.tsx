@@ -1,5 +1,6 @@
 import React from 'react';
 import { ActivityIndicator, Pressable, Text } from 'react-native';
+import { colors } from 'src/constants/colors';
 import { rf } from 'src/utils/size';
 
 import { styles } from './style';
@@ -11,7 +12,7 @@ export default function Button(props: IButtonTypes) {
   return (
     <Pressable onPress={onPress} style={[styles[`body${type}`], bodyStyle]}>
       {isLoading ? (
-        <ActivityIndicator size={rf(4)} />
+        <ActivityIndicator size={rf(4)} color={colors.textLight0} />
       ) : (
         <Text style={[styles[`text${type}`], textStyle]}>{text}</Text>
       )}

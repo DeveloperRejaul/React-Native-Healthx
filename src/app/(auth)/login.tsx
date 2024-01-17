@@ -28,9 +28,8 @@ export default function login() {
 
   useEffect(() => {
     const init = async () => {
-      if (isSuccess && data) {
-        const token = await storage.getAsyncData({ key: '@authToken' });
-        if (token !== 'error') await storage.saveAsyncData({ data: data.token, key: '@authToken' });
+      if (isSuccess && data.message !== 'Invalid credentials') {
+        if (data.token) await storage.saveAsyncData({ data: data.token, key: '@authToken' });
         router.replace('/(main)/');
       }
     };
