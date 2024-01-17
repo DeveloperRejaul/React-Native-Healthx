@@ -30,7 +30,7 @@ export default function login() {
     const init = async () => {
       if (isSuccess && data.message !== 'Invalid credentials') {
         if (data.token) await storage.saveAsyncData({ data: data.token, key: '@authToken' });
-        router.replace('/(main)/');
+        router.replace('/(main)/home');
       }
     };
     init();

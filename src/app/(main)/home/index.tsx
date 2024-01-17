@@ -1,13 +1,14 @@
 /* eslint-disable react-hooks/rules-of-hooks */
 import { Card, Loading } from '@components';
+import { useRouter } from 'expo-router';
 import React, { useEffect } from 'react';
-import { FlatList } from 'react-native';
+import { FlatList, Pressable } from 'react-native';
 import { useFetch } from 'src/hooks/useFetch';
 import { rh, rw } from 'src/utils/size';
 
 export default function index() {
   const { data, handleGet, isLoading, isSuccess } = useFetch();
-
+  const router = useRouter();
   useEffect(() => {
     handleGet('/products?limit=6');
   }, []);
@@ -22,13 +23,15 @@ export default function index() {
         data={data?.products}
         keyExtractor={(item) => item.id.toString()}
         renderItem={({ item }) => (
-          <Card
-            rating={item.rating}
-            price={item.price}
-            uri={item.thumbnail}
-            title={item.title}
-            description={item.description}
-          />
+          <Pressable onPress={() => router.push(`/(main)/home/${item.id}`)}>
+            <Card
+              rating={item.rating}
+              price={item.price}
+              uri={item.thumbnail}
+              title={item.title}
+              description={item.description}
+            />
+          </Pressable>
         )}
       />
     );

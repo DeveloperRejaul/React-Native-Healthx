@@ -18,7 +18,7 @@ export default () => (
       tabBarStyle: { height: TAB_BAR_HEIGHT },
     }}>
     <Tabs.Screen
-      name="index"
+      name="home"
       options={{
         tabBarIcon: ({ color, focused }) => (
           <LinearGradient
